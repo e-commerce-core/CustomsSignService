@@ -12,37 +12,36 @@ namespace Hstar.Ecc.CustomsSignService.SignSdk
         public static extern uint GetCardID([MarshalAs(UnmanagedType.LPArray)] byte[] szCardID, ref int nCardIDLen);
 
         /// <summary>
-        /// 获取证书序列号（卡号）
+        /// 获取证书（卡号）
         /// </summary>
         /// <returns></returns>
         public static string GetCardID()
         {
-            int len = 10000;
-            var resultBytes = new byte[len];
-            var ret = GetCardID(resultBytes, ref len);
+            int dataLen = 10000;
+            var dataArr = new byte[dataLen];
+            var ret = GetCardID(dataArr, ref dataLen);
             if (ret == SIGN_SUCCESS)
             {
-                return Encoding.UTF8.GetString(resultBytes);
+                return Encoding.UTF8.GetString(dataArr);
             }
             throw new Exception($"Get card id failed, error code: {ret}");
         }
-
 
         [DllImport("usercard_cert64\\Sign64.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern uint GetCertNo([MarshalAs(UnmanagedType.LPArray)] byte[] szCertNo, ref int nCertNoLen);
 
         /// <summary>
-        /// 获取证书
+        /// 获取证书编号
         /// </summary>
         /// <returns></returns>
         public static string GetCertNo()
         {
-            var certNoLen = 100;
-            var certNoBytes = new byte[certNoLen];
-            var ret = GetCertNo(certNoBytes, ref certNoLen);
+            var dataLen = 100;
+            var dataArr = new byte[dataLen];
+            var ret = GetCertNo(dataArr, ref dataLen);
             if (ret == SIGN_SUCCESS)
             {
-                return Encoding.UTF8.GetString(certNoBytes);
+                return Encoding.UTF8.GetString(dataArr);
             }
             throw new Exception($"Get cert NO. failed, error code: {ret}");
         }

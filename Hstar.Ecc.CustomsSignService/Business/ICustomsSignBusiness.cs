@@ -10,18 +10,18 @@ namespace Hstar.Ecc.CustomsSignService.Business
         /// </summary>
         /// <param name="signReq"></param>
         /// <returns></returns>
-        Task<string> SignAsync(SignRequest signReq);
+        Task<SignResponse> SignAsync(SignRequest signReq);
 
         /// <summary>
         /// 获取证书
         /// </summary>
         /// <returns></returns>
-        Task<string> GetCertAsync();
+        Task<CertResponse> GetCertAsync();
 
         /// <summary>
         /// 获取证书序列号
         /// </summary>
         /// <returns></returns>
-        Task<string> GetCertNoAsync();
+        Task<CertNoResponse> GetCertNoAsync();
     }
 }

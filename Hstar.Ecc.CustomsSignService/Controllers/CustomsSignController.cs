@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Hstar.Ecc.CustomsSignService.Business;
 using Hstar.Ecc.CustomsSignService.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +20,7 @@ namespace Hstar.Ecc.CustomsSignService.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet, Route("cert")]
-        public async Task<string> GetCertAsync()
+        public async Task<CertResponse> GetCertAsync()
         {
             return await this.customsSignBiz.GetCertAsync();
         }
@@ -33,7 +30,7 @@ namespace Hstar.Ecc.CustomsSignService.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet, Route("cert-no")]
-        public async Task<string> GetCertNoAsync()
+        public async Task<CertNoResponse> GetCertNoAsync()
         {
             return await this.customsSignBiz.GetCertNoAsync();
         }
@@ -44,7 +41,7 @@ namespace Hstar.Ecc.CustomsSignService.Controllers
         /// <param name="signReq"></param>
         /// <returns></returns>
         [HttpPost, Route("sign")]
-        public async Task<string> SignAsync([FromBody]SignRequest signReq)
+        public async Task<SignResponse> SignAsync([FromBody]SignRequest signReq)
         {
             return await this.customsSignBiz.SignAsync(signReq);
         }

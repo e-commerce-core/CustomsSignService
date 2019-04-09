@@ -7,22 +7,22 @@ namespace Hstar.Ecc.CustomsSignService.Business.Implement
 {
     public class CustomsSignBusiness : ICustomsSignBusiness
     {
-        public async Task<string> GetCertNoAsync()
+        public async Task<CertNoResponse> GetCertNoAsync()
         {
-            var result = CustomsSignSdk.GetCertNo();
-            return await Task.Run(() => result);
+            var certNo = CustomsSignSdk.GetCertNo();
+            return await Task.Run(() => new CertNoResponse { CertNo = certNo });
         }
 
-        public async Task<string> GetCertAsync()
+        public async Task<CertResponse> GetCertAsync()
         {
-            var result = CustomsSignSdk.GetCardID();
-            return await Task.Run(() => result);
+            var cert = CustomsSignSdk.GetCardID();
+            return await Task.Run(() => new CertResponse { Cert = cert });
         }
 
-        public async Task<string> SignAsync(SignRequest signReq)
+        public async Task<SignResponse> SignAsync(SignRequest signReq)
         {
             var result = CustomsSignSdk.Sign(signReq.Content, AppConfig.UKeyPassword);
-            return await Task.Run(() => result);
+            return await Task.Run(() => new SignResponse { Content = signReq.Content, SignResult = result });
         }
     }
 }
