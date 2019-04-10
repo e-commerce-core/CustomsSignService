@@ -1,7 +1,7 @@
 ﻿# CustomsSignService
 The customs sign service. 
 
-# 注意事项
+# 签名注意事项
 
 1. 需要用 Administrator 权限启动 Visual Studio （读取UKey）
 2. 获取证书API当前无法返回证书内容，原因未知，待查。
@@ -52,3 +52,16 @@ Response Body: {
 }
 
 ```
+
+# 报关注意事项
+
+1. 证书编号，使用 signtool 获取到的是大写，但是注册和推送海关的时候，一定要使用全小写的证书编号。
+2. 海关请求我们的时候，Method = POST，Content-Type = application.x-www-form-urlencoded，所以必须要从 Request Body 中获取数据，且数据 Key = openReq。如：
+```
+openReq={"sessionID":"fe2374-8fnejf97-55616242","orderNo":"订单号","serviceTime":"1544519952469"}
+```
+3. 金额必须是数字类型，不能是字符串（不需要带双引号）；值的零尾巴需要截取掉。
+| 错误格式 | 正确格式 |
+| --- | --- |
+| 100.0 | 100 |
+| 100.10 | 100.1 |
